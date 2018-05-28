@@ -15,11 +15,9 @@ export default class VideoList extends Component {
             )
         });
         return (
-            <div>
-                <ul className="col-md4 list-group">
-                    {videoItems}
-                </ul>
-            </div>
+            <ul className="col-md-4 list-group">
+                {videoItems}
+            </ul>
         )
     }
 }

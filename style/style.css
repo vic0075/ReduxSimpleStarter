@@ -7,11 +7,11 @@
     width: 75%;
 }
 
-.video-item image {
+.video-item img {
     max-width: 64px;
 }
 
-.video-details .details {
+.video-detail .details {
     margin-top: 10px;
     padding: 10px;
     border: 1px solid #ddd;

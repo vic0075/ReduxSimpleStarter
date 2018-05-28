@@ -4,19 +4,21 @@ export default class SearchBar extends React.Component {
 
     constructor() {
         super();
-        this.state = {name: ''};
+        this.state = {term: ''};
     }
 
     render() {
         return (
             <div className="search-bar">
-                <input value={this.state.name}
-                       onChange={event => {
-                           console.log(event.target.value);
-                           this.setState({name: event.target.value})
-                       }}/>
-                <br/>
+                <input value={this.state.term}
+                       onChange={event => this.onInputChange(event.target.value)}
+                />
             </div>
         );
+    }
+
+    onInputChange(term) {
+        this.setState({term});
+        this.props.onSearchTermChange(term);
     }
 };
