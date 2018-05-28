@@ -1,15 +1,31 @@
-import React from 'react';
+import React, {Component} from 'react';
 import SearchBar from './SearchBar';
+import YTSearch from 'youtube-api-search';
+import VideoList from './ViedoList';
+import VideoDetail from './VideoDetails';
 
-const App = () => {
-    return (
-        <div>
-            <h2>React simple starter</h2>
+const API_KEY = 'AIzaSyBnLeSSJs7nSZVZWB89KjC_W-y2P3wmmaE';
+
+export default class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {videos: []};
+
+        YTSearch({key: API_KEY, term: "cl final 2018"}, (videos) => {
+            this.setState({videos}); //eq. to this.setState({videos:videos})
+        });
+
+    }
+
+    render() {
+        return (
             <div>
-                <SearchBar/>
+                <div>
+                    <SearchBar/>
+                    <VideoDetail video={this.state.videos[0]}/>
+                    <VideoList videos={this.state.videos}/>
+                </div>
             </div>
-        </div>
-    );
-};
-
-export default App;
+        );
+    }
+}
