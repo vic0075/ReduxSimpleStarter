@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 
 export default class VideoDetails extends Component {
     render() {
-
-        if(!this.props.video){
+        if (!this.props.video) {
             return (
                 <div>
                     Loading....
@@ -23,10 +22,10 @@ export default class VideoDetails extends Component {
 
                 <div className="details">
                     <div>
-                        {video.snippet.title}
+                        {this.props.video.snippet.title}
                     </div>
                     <div>
-                        {video.snippet.description}
+                        {this.props.video.snippet.description}
                     </div>
                 </div>
             </div>
