@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import Cart from './components/ex-2/Cart';
 
 
-ReactDOM.render(<App/>, document.querySelector('.container'));
+ReactDOM.render(<Cart/>, document.querySelector('.container'));

@@ -1,0 +1,13 @@
+import React, {Component} from 'react';
+
+
+export default class TotalPrice extends Component {
+    render() {
+        return (
+            <div className="total-price">
+                <span className="col-md-9" style={{borderRight: "none"}}>Total</span>
+                <span style={{textAlign: "right", borderLeft: "none"}} className="col-md-3">{this.props.totalPrice}</span>
+            </div>
+        );
+    }
+}

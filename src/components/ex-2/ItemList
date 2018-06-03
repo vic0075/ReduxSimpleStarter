@@ -1,0 +1,55 @@
+import React, {Component} from 'react';
+import Item from './Item';
+
+export default class ItemList extends Component {
+    constructor(props) {
+        super(props);
+        this.populateItems = this.populateItems.bind(this);
+    }
+
+    populateItems(items, add, subtract, remove) {
+        if (!items) {
+            return;
+        }
+        return (
+            <tbody>
+            {this.itemsRows(items, add, subtract, remove)}
+            </tbody>
+        )
+
+    }
+
+    itemsRows(items, add, subtract, remove) {
+        return items.map(item => {
+                return (
+                    <Item
+                        key={`${item.name}-${item.price}`}
+                        item={item}
+                        add={add}
+                        subtract={subtract}
+                        remove={remove}
+                    />
+                )
+            }
+        );
+    }
+
+    render() {
+        return (
+            <div className="item-list">
+                <table align="center" className="table table-bordered">
+                    <thead align="center">
+                    <tr align="center">
+                        <th align="center" className="col-md-5">Item Description</th>
+                        <th className="col-md-2">Quantity</th>
+                        <th className="col-md-2">Price</th>
+                        <th className="col-md-2">+/-</th>
+                        <th className="col-md-1">x</th>
+                    </tr>
+                    </thead>
+                    {this.populateItems(this.props.items, this.props.add, this.props.subtract, this.props.remove)}
+                </table>
+            </div>
+        );
+    }
+}

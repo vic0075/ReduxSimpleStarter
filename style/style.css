@@ -25,3 +25,39 @@
 .list-group-item:hover {
     background-color: #eee;
 }
+
+.total-price {
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+.total-price > span {
+    background: #4e4fff;
+    border: .5px solid black;
+    border-top: none;
+}
+
+.item-price > input {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-left: 10px;
+}
+
+::-webkit-input-placeholder {
+    padding-left: 10px;
+}
+
+.item-list {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.table, .table > thead > th, .table > tbody > tr > td, table, img, td, th {
+    word-wrap: break-word;
+    text-align: center !important;
+}
+
+td > a > span {
+    margin-left: .5em;
+}

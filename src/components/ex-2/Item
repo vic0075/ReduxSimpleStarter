@@ -1,0 +1,46 @@
+import React, {Component} from 'react';
+
+export default class Item extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: props.item.name,
+            quantity: props.item.quantity,
+            price: props.item.price
+        }
+    }
+
+    render() {
+        const item = this.props.item;
+        if (!item) {
+            return;
+        }
+        return (
+            <tr>
+                <td className="col-md-5">{item.name}</td>
+                <td className="col-md-2">{item.quantity}</td>
+                <td className="col-md-2">{item.price}</td>
+                <td className="col-md-2">
+                    <a
+                        onClick={() => this.props.add(item)}
+                        href="#">
+                        <span className="glyphicon glyphicon-plus"></span>
+                    </a>
+                    <a
+                        onClick={() => this.props.subtract(item)}
+                        href="#">
+                        <span className="glyphicon glyphicon-minus"></span>
+                    </a>
+                </td>
+                <td className="col-md-1 container">
+                    <a
+                        onClick={() => this.props.remove(item)}
+                        href="#">
+                        <span className="glyphicon glyphicon-remove"></span>
+                    </a>
+                </td>
+
+            </tr>
+        );
+    }
+}

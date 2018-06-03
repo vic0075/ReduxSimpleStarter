@@ -1,0 +1,89 @@
+import React, {Component} from 'react';
+import ItemPrice from './ItemPrice';
+import ItemList from './ItemList';
+import TotalPrice from './TotalPrice';
+
+export default class Cart extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: []
+        };
+        this.onNewItemPrice = this.onNewItemPrice.bind(this);
+        this.add = this.add.bind(this);
+        this.subtract = this.subtract.bind(this);
+        this.remove = this.remove.bind(this);
+    }
+
+    onNewItemPrice(itemAndPrice) {
+        let items = this.state.items;
+        const existingItem = this.getExistingItem(items, itemAndPrice);
+        if (existingItem) {
+            existingItem.quantity = existingItem.quantity + 1;
+        } else {
+            items.push({name: itemAndPrice.name, price: itemAndPrice.price, quantity: 1});
+        }
+        console.log(items);
+        this.setState({items})
+    }
+
+    getExistingItem(items, itemAndPrice) {
+        if (!itemAndPrice || !items) {
+            return;
+        }
+        return items.find(item => item.name === itemAndPrice.name && item.price === itemAndPrice.price);
+    }
+
+    calculateTotalPrice(items) {
+        return items.reduce((sum, b) => {
+            const price = b.price * b.quantity;
+            return sum + parseFloat(Number.isInteger(price) ? price : 0.0);
+        }, 0.0);
+    }
+
+    add(itemAndPrice) {
+        const items = this.state.items;
+        const existingItem = this.getExistingItem(this.state.items, itemAndPrice);
+        existingItem.quantity = existingItem.quantity + 1;
+        this.setState({items})
+    }
+
+    subtract(itemAndPrice) {
+        const items = this.state.items;
+        const existingItem = this.getExistingItem(items, itemAndPrice);
+        if (existingItem.quantity === 1) {
+            this.remove(itemAndPrice);
+            return;
+        } else {
+            existingItem.quantity = existingItem.quantity - 1;
+        }
+        this.setState({items});
+    }
+
+    remove(itemAndPrice) {
+        console.log(this.state.items);
+        const items = this.state.items.concat([]).filter(item =>
+            (item.name !== itemAndPrice.name || item.price !== itemAndPrice.price)
+        );
+        console.log(items);
+        this.setState({items});
+    }
+
+    render() {
+        return (
+            <div className="container">
+                <h4>My Cart</h4>
+                <ItemPrice
+                    onNewItem={this.onNewItemPrice}
+                />
+                <ItemList
+                    items={this.state.items}
+                    add={this.add}
+                    subtract={this.subtract}
+                    remove={this.remove}
+                />
+                <TotalPrice totalPrice={this.calculateTotalPrice(this.state.items)}/>
+            </div>
+        );
+    }
+}

@@ -1,0 +1,54 @@
+import React, {Component} from 'react';
+// import _ from 'lodash';
+
+
+export default class ItemPrice extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            itemAndPrice: ''
+        };
+
+        this.onInputChange = this.onInputChange.bind(this);
+        this.onEnterKeyPress = this.onEnterKeyPress.bind(this);
+    }
+
+    onEnterKeyPress(event) {
+        if (event.key !== 'Enter') {
+            return;
+        }
+        const itemAndPrice = event.target.value;
+
+        if (!itemAndPrice || itemAndPrice.split("-").length !== 2) {
+            return;
+        }
+        const item = itemAndPrice.split("-")[0].trim();
+        const price = parseFloat(itemAndPrice.split("-")[1].trim());
+
+        if(!price){
+            return;
+        }
+
+        this.props.onNewItem({name: item, price: price});
+        this.setState({itemAndPrice: ''});
+    }
+
+    onInputChange(event) {
+        const itemAndPrice = event.target.value;
+        this.setState({itemAndPrice: itemAndPrice});
+    }
+
+    render() {
+        return (
+            <div className="item-price">
+                <input
+                    onChange={event => this.onInputChange(event)}
+                    value={this.state.itemAndPrice}
+                    onKeyPress={event => this.onEnterKeyPress(event)}
+                    placeholder="Enter item and price separated by a - (hyphen)"
+                />
+            </div>
+        );
+    }
+}
