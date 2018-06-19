@@ -36,7 +36,8 @@ export function fetchWeather(cityCountry = `${DEFAULT_CITY}, ${DEFAULT_COUNTRY}`
                 humidities.push(weather.main.humidity);
             });
             const {name} = cityData.city;
-            const data = {[name]: {name, temps, pressures, humidities}};
+            const {coord} = cityData.city;
+            const data = {[name]: {name, temps, pressures, humidities, coord}};
 
             dispatch(getWeather(data));
         }).catch((err) => {
